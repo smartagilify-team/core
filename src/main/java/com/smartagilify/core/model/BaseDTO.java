@@ -4,22 +4,25 @@ import com.smartagilify.core.enumerations.EN_STATE;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
+
 @Data
 @NoArgsConstructor
 @ApiModel(description = "This is a common data between all of models.")
+@SuperBuilder
 public abstract class BaseDTO {
     @ApiModelProperty(notes = "this is a unique id for model")
-    private Long id;
+    protected Long id;
     @ApiModelProperty(notes = "this is a hash code for id")
-    private Long hashCode;
+    protected Long hashCode;
     @ApiModelProperty(notes = "this is machine's ip")
-    private String ip;
+    protected String ip;
     @ApiModelProperty(notes = "this is for handling optimistic locking")
-    private Long version;
+    protected Long version;
     @ApiModelProperty(notes = "this is for handling state of data. e.g. deleted,updated and ...")
-    private EN_STATE state;
+    protected EN_STATE state;
     @ApiModelProperty(notes = "this is row level")
-    private Integer rowLevelId;
+    protected Integer rowLevelId;
     @ApiModelProperty(notes = "this is priority")
-    private Integer priority;
+    protected Integer priority;
 }
