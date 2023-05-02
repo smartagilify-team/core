@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 
 @RequiredArgsConstructor
-public abstract class BaseController<E extends BaseEntity, M extends BaseMapper<D, E>, D extends BaseDTO> {
+public abstract class BaseController<E extends BaseEntity, M extends BaseMapper<E, D>, D extends BaseDTO> {
     protected final BaseService<E, M, D> service;
 
     @PostMapping(value = RestAddress.SAVE)

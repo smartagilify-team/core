@@ -19,7 +19,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public abstract class BaseService<E extends BaseEntity, M extends BaseMapper<D, E>, D extends BaseDTO> {
+public abstract class BaseService<E extends BaseEntity, M extends BaseMapper<E, D>, D extends BaseDTO> {
 
     protected final M mapper = Mappers.getMapper(getMapper());
 
