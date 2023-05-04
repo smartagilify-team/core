@@ -1,6 +1,5 @@
 package com.smartagilify.core.controllers;
 
-
 import com.smartagilify.core.entities.BaseEntity;
 import com.smartagilify.core.mappers.BaseMapper;
 import com.smartagilify.core.model.BaseDTO;
