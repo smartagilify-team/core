@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Sort;
 
 @Data
 @Builder
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class InputFilter {
     private Integer pageNumber;
     private Integer pageSize;
+    Sort.Direction direction;
     private String where;
     private String orderBy;
     private String groupBy;

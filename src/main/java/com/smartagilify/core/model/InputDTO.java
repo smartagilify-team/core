@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @AllArgsConstructor
@@ -19,5 +17,5 @@ public class InputDTO<D extends BaseDTO> {
     private Long userId;
     private String session;
     private D data;
-    private List<InputFilter> inputFilterList;
+    private InputFilter inputFilter;
 }

@@ -5,9 +5,11 @@ import com.smartagilify.core.entities.BaseEntity;
 import com.smartagilify.core.mappers.BaseMapper;
 import com.smartagilify.core.model.BaseDTO;
 import com.smartagilify.core.model.InputDTO;
+import com.smartagilify.core.model.PageDTO;
 import com.smartagilify.core.model.ResultDTO;
 import com.smartagilify.core.services.BaseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,10 +29,20 @@ public abstract class BaseController<E extends BaseEntity, M extends BaseMapper<
                 .build(), HttpStatus.CREATED);
     }
 
-    @GetMapping(value = RestAddress.FIND_ALL)
-    public ResponseEntity<ResultDTO<D>> loadAll() {
+    @PostMapping(value = RestAddress.FIND_ALL)
+    public ResponseEntity<ResultDTO<D>> loadAll(@RequestBody InputDTO<D> dto) {
+        PageDTO<D> all = service.findAll(
+                dto.getInputFilter().getPageNumber(),
+                dto.getInputFilter().getPageSize(),
+                dto.getInputFilter().getDirection() == null ? Sort.Direction.DESC : dto.getInputFilter().getDirection(),
+                null
+        );
         return new ResponseEntity<>(ResultDTO.<D>builder()
-                .resultList(service.findAll())
+                .resultList(all.getResults())
+                .pageNumber(dto.getInputFilter().getPageNumber())
+                .pageSize(all.getResults().size())
+                .totalPages(all.getTotalPages())
+                .totalRecordSize(all.getTotalElements())
                 .message("FIND ALL SUCCESSFULLY")
                 .build(), HttpStatus.OK);
     }
