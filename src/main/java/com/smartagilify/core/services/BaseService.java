@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -75,16 +74,8 @@ public abstract class BaseService<E extends BaseEntity, M extends BaseMapper<E, 
                 .build();
     }
 
-    public List<D> findAll(Sort sort) {
-        return mapper.entity2Dto(jpaRepository.findAll(sort));
-    }
-
     public List<D> findAllById(Iterable<Long> ids) {
         return mapper.entity2Dto(jpaRepository.findAllById(ids));
-    }
-
-    public Page<E> findAll(Pageable pageable) {
-        return jpaRepository.findAll(pageable);
     }
 
     public void softDelete(D dto, Long userId) {
