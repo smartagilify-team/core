@@ -34,7 +34,7 @@ public abstract class BaseController<E extends BaseEntity, M extends BaseMapper<
                 dto.getInputFilter().getPageNumber(),
                 dto.getInputFilter().getPageSize(),
                 dto.getInputFilter().getDirection() == null ? Sort.Direction.DESC : dto.getInputFilter().getDirection(),
-                null
+                dto.getInputFilter().getOrderBy()
         );
         return new ResponseEntity<>(ResultDTO.<D>builder()
                 .resultList(all.getResults())

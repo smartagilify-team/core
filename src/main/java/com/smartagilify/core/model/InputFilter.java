@@ -15,7 +15,7 @@ public class InputFilter {
     private Integer pageSize;
     Sort.Direction direction;
     private String where;
-    private String orderBy;
+    private String[] orderBy;
     private String groupBy;
     private String having;
     private Boolean fetchDeleted;

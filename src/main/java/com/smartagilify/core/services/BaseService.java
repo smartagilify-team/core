@@ -63,8 +63,10 @@ public abstract class BaseService<E extends BaseEntity, M extends BaseMapper<E, 
     }
 
     public PageDTO<D> findAll(int page, int size, Sort.Direction direction, String... properties) {
+        //check if properties array is null or empty make order by query use id as default column
         if (Objects.isNull(properties) || Objects.equals(properties.length, 0))
             properties = new String[]{HibernateStaticValues.ID};
+
         Page<E> all = jpaRepository.findAll(PageRequest.of(page, size, direction, properties));
         return PageDTO.<D>builder()
                 .results(mapper.entity2Dto(all.getContent()))
