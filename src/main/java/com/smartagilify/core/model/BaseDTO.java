@@ -3,7 +3,8 @@ package com.smartagilify.core.model;
 import com.smartagilify.core.enumerations.EN_STATE;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Data

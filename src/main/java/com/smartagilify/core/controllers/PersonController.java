@@ -14,13 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @ApiOperation(value = "operation on person",
         notes = "You can do operation on person model.",
         response = ResponseEntity.class)
-public class PersonController extends BaseController<PersonDTO, Person, PersonMapper> {
-    public PersonController(BaseService<Person> service) {
+public class PersonController extends BaseController<Person, PersonMapper, PersonDTO> {
+    public PersonController(BaseService<Person, PersonMapper, PersonDTO> service) {
         super(service);
-    }
-
-    @Override
-    protected Class<PersonMapper> getMapper() {
-        return PersonMapper.class;
     }
 }
