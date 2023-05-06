@@ -1,14 +1,16 @@
 package com.smartagilify.core.services;
 
 import com.smartagilify.core.entities.BaseEntity;
+import com.smartagilify.core.entities.base.HibernateStaticValues;
 import com.smartagilify.core.enumerations.EN_STATE;
 import com.smartagilify.core.exceptions.BusinessException;
 import com.smartagilify.core.mappers.BaseMapper;
 import com.smartagilify.core.model.BaseDTO;
+import com.smartagilify.core.model.PageDTO;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -59,20 +61,21 @@ public abstract class BaseService<E extends BaseEntity, M extends BaseMapper<E, 
         return mapper.entity2Dto(byId.orElseThrow(() -> new BusinessException("ID IS NOT VALID")));
     }
 
-    public List<D> findAll() {
-        return mapper.entity2Dto(jpaRepository.findAll());
-    }
+    public PageDTO<D> findAll(int page, int size, Sort.Direction direction, String... properties) {
+        //check if properties array is null or empty make order by query use id as default column
+        if (Objects.isNull(properties) || Objects.equals(properties.length, 0))
+            properties = new String[]{HibernateStaticValues.ID};
 
-    public List<D> findAll(Sort sort) {
-        return mapper.entity2Dto(jpaRepository.findAll(sort));
+        Page<E> all = jpaRepository.findAll(PageRequest.of(page, size, direction, properties));
+        return PageDTO.<D>builder()
+                .results(mapper.entity2Dto(all.getContent()))
+                .totalPages(all.getTotalPages())
+                .totalElements(all.getTotalElements())
+                .build();
     }
 
     public List<D> findAllById(Iterable<Long> ids) {
         return mapper.entity2Dto(jpaRepository.findAllById(ids));
-    }
-
-    public Page<E> findAll(Pageable pageable) {
-        return jpaRepository.findAll(pageable);
     }
 
     public void softDelete(D dto, Long userId) {

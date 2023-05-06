@@ -15,6 +15,7 @@ public class ResultDTO<D extends BaseDTO> {
     private List<D> resultList;
     private Integer pageNumber;
     private Integer pageSize;
+    private Integer totalPages;
     private Long totalRecordSize;
     private Integer code;
     private String message;

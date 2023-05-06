@@ -7,6 +7,7 @@ public class HibernateStaticValues {
 
     //MainBaseEntity👇
     public static final String ID_SEQ_GENERATOR = "seq_generator";
+    public static final String ID = "id";
 
     //BaseEntity👇
     public static final String CREATE_DATE = "CREATE_DATE";
