@@ -1,21 +1,20 @@
 package com.smartagilify.core.controllers;
 
+import com.smartagilify.core.constant.RestAddress;
 import com.smartagilify.core.entities.Person;
 import com.smartagilify.core.mappers.person.PersonMapper;
 import com.smartagilify.core.model.person.PersonDTO;
-import com.smartagilify.core.services.BaseService;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.http.ResponseEntity;
+import com.smartagilify.core.repositories.PersonRepository;
+import com.smartagilify.core.services.PersonService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(RestAddress.PERSON)
-@ApiOperation(value = "operation on person",
-        notes = "You can do operation on person model.",
-        response = ResponseEntity.class)
-public class PersonController extends BaseController<Person, PersonMapper, PersonDTO> {
-    public PersonController(BaseService<Person, PersonMapper, PersonDTO> service) {
+public class PersonController extends BaseController<Person, PersonRepository, PersonService, PersonMapper, PersonDTO> {
+
+    public PersonController(PersonService service) {
         super(service);
     }
+
 }

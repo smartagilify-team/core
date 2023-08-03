@@ -2,15 +2,12 @@ package com.smartagilify.core.entities;
 
 import com.smartagilify.core.entities.base.HibernateStaticValues;
 import com.smartagilify.core.enumerations.EN_STATE;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
@@ -34,4 +31,16 @@ public abstract class BaseEntity extends MainBaseEntity {
     protected Integer rowLevelId;
     @Column(name = HibernateStaticValues.PRIORITY)
     protected Integer priority;
+
+    @PrePersist
+    protected void prePersistEntity() {
+        this.state = EN_STATE.CREATED;
+        this.createDate = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void preUpdateEntity() {
+        if (this.state == null) this.state = EN_STATE.UPDATED;
+        this.updateDate = LocalDateTime.now();
+    }
 }

@@ -1,18 +1,16 @@
 package com.smartagilify.core.model.person;
 
 import com.smartagilify.core.model.BaseDTO;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-@ApiModel(description = "Details about person")
+@EqualsAndHashCode(callSuper = true)
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class PersonDTO extends BaseDTO {
-    @ApiModelProperty(notes = "this is first name of person")
+    @NotNull
     private String firstName;
-    @ApiModelProperty(notes = "this is last name of person")
     private String lastName;
 }

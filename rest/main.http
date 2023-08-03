@@ -1,0 +1,39 @@
+### SAVE
+POST http://localhost:9092/rest/person/save
+Content-Type: application/json
+
+{
+  "actionType": "SAVE",
+  "userId": 1,
+  "data": {
+    "firstName": "reza"
+  }
+}
+
+### FIND_ALL
+POST http://localhost:9092/rest/person/find-all
+Content-Type: application/json
+
+{
+  "inputFilter": {
+    "pageNumber": 0,
+    "pageSize": 10
+  }
+}
+
+### UPDATE
+PUT http://localhost:9092/rest/person/update
+Content-Type: application/json
+
+{
+  "actionType": "UPDATE",
+  "userId": 1,
+  "data": {
+    "id": 302,
+    "version": 2,
+    "firstName": "reza"
+  }
+}
+
+### find by id
+GET http://localhost:9092/rest/person/find-by-id/652?hashcode=b54cc8d1a60a42852ef7480fd9c984001f65b8c06ed061a87d3ca9bad07d1a7e
