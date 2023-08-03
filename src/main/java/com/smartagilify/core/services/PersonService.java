@@ -3,18 +3,13 @@ package com.smartagilify.core.services;
 import com.smartagilify.core.entities.Person;
 import com.smartagilify.core.mappers.person.PersonMapper;
 import com.smartagilify.core.model.person.PersonDTO;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.smartagilify.core.repositories.PersonRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PersonService extends BaseService<Person, PersonMapper, PersonDTO> {
+public class PersonService extends BaseService<Person, PersonRepository, PersonMapper, PersonDTO> {
 
-    protected PersonService(JpaRepository<Person, Long> jpaRepository) {
-        super(jpaRepository);
-    }
-
-    @Override
-    protected Class<PersonMapper> getMapper() {
-        return PersonMapper.class;
+    public PersonService(PersonMapper mapper, PersonRepository jpaRepository) {
+        super(mapper, jpaRepository);
     }
 }
